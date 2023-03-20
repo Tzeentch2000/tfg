@@ -1,6 +1,15 @@
+using ContextDB;
+using Microsoft.EntityFrameworkCore;
+using Wrapper;
+using RepositoryWrapperContext;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var connectionString = builder.Configuration.GetConnectionString("PostgreSQLConnection");
+builder.Services.AddDbContext<RepositoryContext>(options =>
+    options.UseNpgsql(connectionString));
+builder.Services.AddScoped<IRepositoryWrapper, RepositoryWrapper>(); 
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
