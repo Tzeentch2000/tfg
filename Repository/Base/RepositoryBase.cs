@@ -1,9 +1,9 @@
 using System.Linq.Expressions;
-using IRepositoryBase;
+using tfg.Repository.Base.IRepositoryBase;
 using ContextDB;
 using Microsoft.EntityFrameworkCore;
 
-namespace RepositoryBase
+namespace tfg.Repository.Base.RepositoryBase
 {
     public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {

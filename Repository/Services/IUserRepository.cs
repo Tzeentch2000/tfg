@@ -1,6 +1,6 @@
 
 
-namespace UserServiceInterface
+namespace tfg.Repository.Services.IUserRepository
 {
     public interface IUserRepository
     {

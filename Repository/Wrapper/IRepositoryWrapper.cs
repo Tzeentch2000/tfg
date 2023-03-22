@@ -1,4 +1,4 @@
-using UserServiceInterface;
+using tfg.Repository.Services.IUserRepository;
 
 namespace Wrapper
 {

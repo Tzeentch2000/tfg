@@ -1,6 +1,6 @@
 using ContextDB;
-using RepositoryUser;
-using UserServiceInterface;
+using tfg.Repository.UserRepository;
+using tfg.Repository.Services.IUserRepository;
 using Wrapper;
 
 namespace RepositoryWrapperContext

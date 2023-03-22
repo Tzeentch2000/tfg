@@ -1,9 +1,9 @@
 using ContextDB;
 using Microsoft.EntityFrameworkCore;
-using RepositoryBase;
-using UserServiceInterface;
+using tfg.Repository.Base.RepositoryBase;
+using tfg.Repository.Services.IUserRepository;
 
-namespace RepositoryUser
+namespace tfg.Repository.UserRepository
 {
     public class UserRepository : RepositoryBase<User>, IUserRepository 
     { 
