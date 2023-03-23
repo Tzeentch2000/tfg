@@ -1,6 +1,7 @@
 
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
-
+[NotMapped]
 public class Jwt{
     public string Key { get; set; }
     public string Issuer { get; set; }
