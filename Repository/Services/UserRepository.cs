@@ -29,6 +29,15 @@ namespace tfg.Repository.UserRepository
                 .FirstOrDefault();
         }
 
+        public int Login(User user){
+            var lUser = FindByCondition(u => u.Email == user.Email && u.Password == user.Password)
+            .FirstOrDefault();
+            if(lUser == null){
+                return -1;
+            }
+            return lUser.Id;
+        }
+
         public User GetUserWithDetails(Guid userId)
         {
             return FindByCondition(user => user.Id.Equals(userId))

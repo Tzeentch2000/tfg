@@ -8,6 +8,7 @@ namespace tfg.Repository.Services.IUserRepository
         IEnumerable<User> GetAllUsers();
         User GetUserById(Guid userId);
         User GetUserWithDetails(Guid userId);
+        int Login(User user);
         void CreateUser(User user);
         void UpdateUser(User user);
         void DeleteUser(User user);
