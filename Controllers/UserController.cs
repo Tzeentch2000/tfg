@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Wrapper;
 
-namespace UserController
+namespace tfg.Controllers.UserController
 {
     [ApiController]
     [Route("[controller]")]

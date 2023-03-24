@@ -2,6 +2,7 @@ using ContextDB;
 using tfg.Repository.UserRepository;
 using tfg.Repository.Services.IUserRepository;
 using Wrapper;
+using tfg.Repository.Services.ICategoryRepository;
 
 namespace RepositoryWrapperContext
 {
@@ -20,6 +21,19 @@ namespace RepositoryWrapperContext
                 return _user; 
             } 
         } 
+
+        private ICategoryRepository _category; 
+        public ICategoryRepository Category 
+        { 
+            get 
+            { 
+                if (_category == null) 
+                { 
+                    _category = new CategoryRepository(_repoContext); 
+                } 
+                return _category; 
+            } 
+        }
 
         public RepositoryWrapper(RepositoryContext repositoryContext) 
         { 

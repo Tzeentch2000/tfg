@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace tfg.Migrations
 {
     /// <inheritdoc />
-    public partial class _2migration : Migration
+    public partial class _3migration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -46,6 +46,48 @@ namespace tfg.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "user",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Email = table.Column<string>(type: "text", nullable: true),
+                    Password = table.Column<string>(type: "text", nullable: true),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    Surname = table.Column<string>(type: "text", nullable: true),
+                    Phone = table.Column<int>(type: "integer", nullable: false),
+                    IsAdmin = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_user", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BookCategory",
+                columns: table => new
+                {
+                    BooksId = table.Column<int>(type: "integer", nullable: false),
+                    CategoriesId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookCategory", x => new { x.BooksId, x.CategoriesId });
+                    table.ForeignKey(
+                        name: "FK_BookCategory_book_BooksId",
+                        column: x => x.BooksId,
+                        principalTable: "book",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BookCategory_category_CategoriesId",
+                        column: x => x.CategoriesId,
+                        principalTable: "category",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "order",
                 columns: table => new
                 {
@@ -69,30 +111,6 @@ namespace tfg.Migrations
                         name: "FK_order_user_UserId",
                         column: x => x.UserId,
                         principalTable: "user",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "BookCategory",
-                columns: table => new
-                {
-                    BooksId = table.Column<int>(type: "integer", nullable: false),
-                    CategoriesId = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BookCategory", x => new { x.BooksId, x.CategoriesId });
-                    table.ForeignKey(
-                        name: "FK_BookCategory_book_BooksId",
-                        column: x => x.BooksId,
-                        principalTable: "book",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_BookCategory_category_CategoriesId",
-                        column: x => x.CategoriesId,
-                        principalTable: "category",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -127,6 +145,9 @@ namespace tfg.Migrations
 
             migrationBuilder.DropTable(
                 name: "book");
+
+            migrationBuilder.DropTable(
+                name: "user");
         }
     }
 }

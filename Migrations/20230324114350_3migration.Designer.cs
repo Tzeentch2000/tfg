@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace tfg.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20230323193515_2migration")]
-    partial class _2migration
+    [Migration("20230324114350_3migration")]
+    partial class _3migration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
