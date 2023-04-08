@@ -7,29 +7,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace tfg.Migrations
 {
     /// <inheritdoc />
-    public partial class _3migration : Migration
+    public partial class _5migration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "book",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: true),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    Author = table.Column<string>(type: "text", nullable: true),
-                    Price = table.Column<double>(type: "double precision", nullable: false),
-                    Image = table.Column<string>(type: "text", nullable: true),
-                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_book", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "category",
                 columns: table => new
@@ -43,6 +25,21 @@ namespace tfg.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_category", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "state",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_state", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -61,6 +58,31 @@ namespace tfg.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_user", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "book",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Author = table.Column<string>(type: "text", nullable: true),
+                    Price = table.Column<double>(type: "double precision", nullable: false),
+                    Image = table.Column<string>(type: "text", nullable: true),
+                    StateId = table.Column<int>(type: "integer", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_book", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_book_state_StateId",
+                        column: x => x.StateId,
+                        principalTable: "state",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -116,6 +138,11 @@ namespace tfg.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_book_StateId",
+                table: "book",
+                column: "StateId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_BookCategory_CategoriesId",
                 table: "BookCategory",
                 column: "CategoriesId");
@@ -148,6 +175,9 @@ namespace tfg.Migrations
 
             migrationBuilder.DropTable(
                 name: "user");
+
+            migrationBuilder.DropTable(
+                name: "state");
         }
     }
 }

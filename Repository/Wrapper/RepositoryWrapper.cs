@@ -3,6 +3,10 @@ using tfg.Repository.UserRepository;
 using tfg.Repository.Services.IUserRepository;
 using Wrapper;
 using tfg.Repository.Services.ICategoryRepository;
+using tfg.Repository.Services.IStateRepository;
+using tfg.Repository.StateRepository;
+using tfg.Repository.Services.IBookRepository;
+using tfg.Repository.BookRepository;
 
 namespace RepositoryWrapperContext
 {
@@ -33,6 +37,28 @@ namespace RepositoryWrapperContext
                 } 
                 return _category; 
             } 
+        }
+
+        private IStateRepository _state;
+        public IStateRepository State{
+            get
+            {
+                if(_state == null){
+                    _state = new StateRepository(_repoContext);
+                }
+                return _state;
+            }
+        }
+
+        private IBookRepository _book;
+        public IBookRepository Book{
+            get
+            {
+                if(_book == null){
+                    _book = new BookRepository(_repoContext);
+                }
+                return _book;
+            }
         }
 
         public RepositoryWrapper(RepositoryContext repositoryContext) 

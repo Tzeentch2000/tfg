@@ -8,19 +8,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Wrapper;
 
-namespace tfg.Controllers.CategoryController
+namespace tfg.Controllers.StateController
 {
     [ApiController]
     [Route("[controller]")]
-    public class CategoryController : ControllerBase 
+    public class StateController : ControllerBase 
     { 
         private IRepositoryWrapper _repository;     
-
         private IMapper _mapper;   
-        public CategoryController(IRepositoryWrapper repository,IMapper mapper) 
+        public StateController(IRepositoryWrapper repository) 
         { 
             _repository = repository;
-            _mapper = mapper;
 
         }
         
@@ -29,9 +27,8 @@ namespace tfg.Controllers.CategoryController
         { 
             try 
             { 
-                var categories = _repository.Category.GetAllCategories(); 
-                var categoriesResult = _mapper.Map<IEnumerable<CategoryDTO>>(categories);
-                return Ok(categoriesResult); 
+                var states = _repository.State.GetAllStates(); 
+                return Ok(states); 
             } 
             catch (Exception ex) 
             { 
@@ -39,20 +36,19 @@ namespace tfg.Controllers.CategoryController
             } 
         }
 
-        [HttpGet("{id}", Name = "CategoryById")] 
+        [HttpGet("{id}", Name = "StateById")] 
         public IActionResult GetById(int id) 
         { 
             try 
             { 
-                var category = _repository.Category.GetCategoryById(id); 
-                var categoryResult = _mapper.Map<CategoryDTO>(category);
-                if (category == null) 
+                var state = _repository.State.GetStateById(id); 
+                if (state == null) 
                 { 
                     return NotFound(); 
                 } 
                 else 
                 { 
-                    return Ok(categoryResult); 
+                    return Ok(state); 
                 } 
             } 
             catch (Exception ex) 
@@ -62,11 +58,11 @@ namespace tfg.Controllers.CategoryController
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody]CategoryDTO category)
+        public IActionResult Create([FromBody]State state)
         {
             try
             {
-                if (category == null)
+                if (state == null)
                 {
                     return BadRequest("Owner object is null");
                 }
@@ -76,11 +72,10 @@ namespace tfg.Controllers.CategoryController
                     return BadRequest("Invalid model object");
                 }
 
-                var categoryEntity = _mapper.Map<Category>(category);
-                _repository.Category.CreateCategory(categoryEntity);
+                _repository.State.CreateState(state);
                 _repository.Save();
 
-                return Created("created",category);
+                return Created("created",state);
             }
             catch (Exception ex)
             {
@@ -89,11 +84,11 @@ namespace tfg.Controllers.CategoryController
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody]Category category)
+        public IActionResult Update(int id, [FromBody]State state)
         {
             try
             {
-                if (category == null)
+                if (state == null)
                 {
                     return BadRequest("Owner object is null");
                 }
@@ -103,13 +98,13 @@ namespace tfg.Controllers.CategoryController
                     return BadRequest("Invalid model object");
                 }
 
-                var categoryEntity = _repository.Category.GetCategoryById(id);
-                if (categoryEntity == null)
+                var stateEntity = _repository.State.GetStateById(id);
+                if (stateEntity == null)
                 {
                     return NotFound();
                 }
 
-                _repository.Category.UpdateCategory(category);
+                _repository.State.UpdateState(state);
                 _repository.Save();
 
                 return NoContent();

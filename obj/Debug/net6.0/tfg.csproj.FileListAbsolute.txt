@@ -94,6 +94,7 @@ C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\bin\Debug\net6.0\tfg.dep
 C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\bin\Debug\net6.0\tfg.runtimeconfig.json
 C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\bin\Debug\net6.0\tfg.dll
 C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\bin\Debug\net6.0\tfg.pdb
+C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\bin\Debug\net6.0\Azure.Core.dll
 C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\bin\Debug\net6.0\Azure.Identity.dll
 C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\bin\Debug\net6.0\Humanizer.dll
@@ -178,3 +179,4 @@ C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\obj\Debug\net6.0\refint\
 C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\obj\Debug\net6.0\tfg.pdb
 C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\obj\Debug\net6.0\tfg.genruntimeconfig.cache
 C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\obj\Debug\net6.0\ref\tfg.dll
+C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
