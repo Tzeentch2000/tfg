@@ -8,8 +8,10 @@ namespace tfg.Repository.Services.IBookRepository
         Book GetBookWithDetails(int id);
         void CreateBook(Book model);
         Book CreateBookWithDetails(Book model);
-        void tuputamadre(Book book);
+        void UpdateAllBookAtributes(Book book);
         void UpdateBook(Book model);
         void DeleteBook(Book model);
+        IEnumerable<Book> booksByState(int stateId);
+        IEnumerable<Book> booksByCategories(int categoryId);
     }
 }

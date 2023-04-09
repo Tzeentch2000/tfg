@@ -80,7 +80,7 @@ namespace tfg.Controllers.CategoryController
                 _repository.Category.CreateCategory(categoryEntity);
                 _repository.Save();
 
-                return Created("created",category);
+                return Created("created",categoryEntity);
             }
             catch (Exception ex)
             {
@@ -120,8 +120,8 @@ namespace tfg.Controllers.CategoryController
             }
         }
 
-        /*[HttpDelete("{id}")]
-        public IActionResult DeleteOwner(int id)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
         {
             try
             {
@@ -131,22 +131,20 @@ namespace tfg.Controllers.CategoryController
                     return NotFound();
                 }
 
-                if (_repository.category.AccountsByOwner(id).Any()) 
+                if (_repository.Book.booksByCategories(id).Any()) 
                 {
-                    _logger.LogError($"Cannot delete owner with id: {id}. It has related accounts. Delete those accounts first"); 
-                    return BadRequest("Cannot delete owner. It has related accounts. Delete those accounts first"); 
+                    return BadRequest("Cannot delete category. It has related books. Delete those books first"); 
                 }
 
-                _repository.Owner.DeleteOwner(owner);
+                _repository.Category.DeleteCategory(category);
                 _repository.Save();
 
                 return NoContent();
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Something went wrong inside DeleteOwner action: {ex.Message}");
                 return StatusCode(500, "Internal server error");
             }
-        }*/
+        }
     }
 }

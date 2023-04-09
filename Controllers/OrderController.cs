@@ -8,15 +8,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Wrapper;
 
-namespace tfg.Controllers.StateController
+namespace tfg.Controllers.OrderController
 {
     [ApiController]
     [Route("[controller]")]
-    public class StateController : ControllerBase 
+    public class OrderController : ControllerBase 
     { 
         private IRepositoryWrapper _repository;     
         private IMapper _mapper;   
-        public StateController(IRepositoryWrapper repository,IMapper mapper) 
+        public OrderController(IRepositoryWrapper repository,IMapper mapper) 
         { 
             _repository = repository;
              _mapper = mapper;
@@ -28,8 +28,8 @@ namespace tfg.Controllers.StateController
         { 
             try 
             { 
-                var states = _repository.State.GetAllStates(); 
-                return Ok(states); 
+                var orders = _repository.Order.GetAllOrders(); 
+                return Ok(orders); 
             } 
             catch (Exception ex) 
             { 
@@ -37,19 +37,19 @@ namespace tfg.Controllers.StateController
             } 
         }
 
-        [HttpGet("{id}", Name = "StateById")] 
+        [HttpGet("{id}", Name = "OrderById")] 
         public IActionResult GetById(int id) 
         { 
             try 
             { 
-                var state = _repository.State.GetStateById(id); 
-                if (state == null) 
+                var order = _repository.Order.GetOrderById(id); 
+                if (order == null) 
                 { 
                     return NotFound(); 
                 } 
                 else 
                 { 
-                    return Ok(state); 
+                    return Ok(order); 
                 } 
             } 
             catch (Exception ex) 
@@ -59,13 +59,13 @@ namespace tfg.Controllers.StateController
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody]State state)
+        public IActionResult Create([FromBody]Order order)
         {
             try
             {
-                if (state == null)
+                if (order == null)
                 {
-                    return BadRequest("Owner object is null");
+                    return BadRequest("Order object is null");
                 }
 
                 if (!ModelState.IsValid)
@@ -73,42 +73,10 @@ namespace tfg.Controllers.StateController
                     return BadRequest("Invalid model object");
                 }
 
-                _repository.State.CreateState(state);
+                _repository.Order.CreateOrder(order);
                 _repository.Save();
 
-                return Created("created",state);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "Internal server error");
-            }
-        }
-
-        [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody]State state)
-        {
-            try
-            {
-                if (state == null)
-                {
-                    return BadRequest("Owner object is null");
-                }
-
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest("Invalid model object");
-                }
-
-                var stateEntity = _repository.State.GetStateById(id);
-                if (stateEntity == null)
-                {
-                    return NotFound();
-                }
-
-                _repository.State.UpdateState(state);
-                _repository.Save();
-
-                return NoContent();
+                return Created("created",order);
             }
             catch (Exception ex)
             {
@@ -121,19 +89,20 @@ namespace tfg.Controllers.StateController
         {
             try
             {
-                var state = _repository.State.GetStateById(id);
-                if (state == null)
+                var order = _repository.Order.GetOrderById(id);
+                if (order == null)
                 {
                     return NotFound();
                 }
 
-                if (_repository.Book.booksByState(id).Any()) 
+                Console.WriteLine($"GRUCCCCCCCCCCCCI: {DateTime.Now.Subtract(order.Date)}");
+                /*if (_repository.Book.booksByState(id).Any()) 
                 {
                     return BadRequest("Cannot delete state. It has related books. Delete those books first"); 
-                }
+                }*/
 
-                _repository.State.DeleteState(state);
-                _repository.Save();
+                /*_repository.Order.DeleteOrder(order);
+                _repository.Save();*/
 
                 return NoContent();
             }

@@ -57,7 +57,7 @@ namespace tfg.Repository.BookRepository
              return model;
         }
 
-        public void tuputamadre(Book book){
+        public void UpdateAllBookAtributes(Book book){
         
             Book eyy = RepositoryContext.book.Include(x => x.Categories).Include(x => x.State).Single(x => x.Id == book.Id);
             eyy.Categories.Clear();
@@ -75,6 +75,16 @@ namespace tfg.Repository.BookRepository
         public void DeleteBook(Book book)
         {
             Delete(book);
+        }
+
+        public IEnumerable<Book> booksByState(int stateId)
+        {
+            return FindByCondition(b => b.State.Id.Equals(stateId)).ToList(); 
+        }
+
+        public IEnumerable<Book> booksByCategories(int categoryId)
+        {
+            return RepositoryContext.Set<Book>().Where(x => x.Categories.Any(c => c.Id == categoryId));
         }
     }
 }

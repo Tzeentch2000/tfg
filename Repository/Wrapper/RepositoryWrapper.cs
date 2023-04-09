@@ -7,6 +7,8 @@ using tfg.Repository.Services.IStateRepository;
 using tfg.Repository.StateRepository;
 using tfg.Repository.Services.IBookRepository;
 using tfg.Repository.BookRepository;
+using tfg.Repository.Services.IOrderRepository;
+using tfg.Repository.OrderRepository;
 
 namespace RepositoryWrapperContext
 {
@@ -58,6 +60,17 @@ namespace RepositoryWrapperContext
                     _book = new BookRepository(_repoContext);
                 }
                 return _book;
+            }
+        }
+
+        private IOrderRepository _order;
+        public IOrderRepository Order{
+            get
+            {
+                if(_order == null){
+                    _order = new OrderRepository(_repoContext);
+                }
+                return _order;
             }
         }
 

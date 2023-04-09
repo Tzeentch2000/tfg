@@ -2,6 +2,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -15,21 +16,44 @@ namespace tfg.Controllers.UserController
     { 
         private IRepositoryWrapper _repository;     
         public IConfiguration _configuration;   
-        public UserController(IRepositoryWrapper repository,IConfiguration configuration) 
+        private IMapper _mapper;   
+        public UserController(IRepositoryWrapper repository,IConfiguration configuration,IMapper mapper) 
         { 
             _repository = repository;
             _configuration = configuration;
+            _mapper = mapper;
         }
-        [Authorize]
+        //[Authorize]
         [HttpGet] 
         //[AllowAnonymous]
         public async Task<IActionResult> GetAllUsers() 
         { 
             try 
             { 
-                var users = await _repository.User.GetAllUsers1(); 
+                var users = await _repository.User.GetAllUsersWithDetails(); 
 
                 return Ok(users); 
+            } 
+            catch (Exception ex) 
+            { 
+                return StatusCode(500, "Internal server error"); 
+            } 
+        }
+
+        [HttpGet("{id}", Name = "UserById")] 
+        public IActionResult GetById(int id) 
+        { 
+            try 
+            { 
+                var user = _repository.User.GetUserWithDetails(id); 
+                if (user == null) 
+                { 
+                    return NotFound(); 
+                } 
+                else 
+                { 
+                    return Ok(user); 
+                } 
             } 
             catch (Exception ex) 
             { 
@@ -74,11 +98,36 @@ namespace tfg.Controllers.UserController
             }
         }*/
 
-        
-
         [HttpPost]
         [Route("Create")]
-        public IActionResult CreateUser([FromBody]User user)
+        public IActionResult CreateUser([FromBody]UserForInsertDTO user)
+        {
+            try
+            {
+                if (user == null)
+                {
+                    return BadRequest("User object is null");
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Invalid model object");
+                }
+                User userEntity = _mapper.Map<User>(user);
+                userEntity.IsAdmin = false;
+                _repository.User.CreateUser(userEntity);
+                _repository.Save();
+
+                return Created("created",userEntity);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error " + ex.Message);
+            }
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, [FromBody]UserForUpdateDTO user)
         {
             try
             {
@@ -92,10 +141,38 @@ namespace tfg.Controllers.UserController
                     return BadRequest("Invalid model object");
                 }
 
-                _repository.User.CreateUser(user);
+                var userEntity = _repository.User.GetUserById(id);
+                if (userEntity == null)
+                {
+                    return NotFound();
+                }
+                User userMappedEntity = _mapper.Map<User>(user);
+                _repository.User.UpdateUser(userMappedEntity);
                 _repository.Save();
 
-                return Created("created",user);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error " + ex.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                var user = _repository.User.GetUserById(id);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                _repository.User.DeleteUser(user);
+                _repository.Save();
+
+                return NoContent();
             }
             catch (Exception ex)
             {

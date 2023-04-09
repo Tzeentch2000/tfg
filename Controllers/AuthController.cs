@@ -22,7 +22,7 @@ namespace tfg.Controllers.AuthController
         }
 
         [HttpPost]
-        [Route("Auth")]
+        //[Route("Auth")]
         public IActionResult Auth([FromBody]User user)
         {
             try

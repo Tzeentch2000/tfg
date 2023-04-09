@@ -23,7 +23,15 @@ namespace tfg.Repository.UserRepository
                 .ToList(); 
         }
 
-        public User GetUserById(Guid userId)
+        public async Task<IEnumerable<User>> GetAllUsersWithDetails()
+        {
+             return await RepositoryContext.Set<User>()
+             .Include(u => u.Orders).ThenInclude(o => o.Book).ThenInclude(b => b.Categories)
+             .Include(u => u.Orders).ThenInclude(o => o.Book).ThenInclude(b => b.State)
+             .ToListAsync();
+        }
+
+        public User GetUserById(int userId)
         {
             return FindByCondition(u => u.Id.Equals(userId))
                 .FirstOrDefault();
@@ -38,11 +46,12 @@ namespace tfg.Repository.UserRepository
             return lUser.Id;
         }
 
-        public User GetUserWithDetails(Guid userId)
+        public User GetUserWithDetails(int userId)
         {
             return FindByCondition(user => user.Id.Equals(userId))
-                //.Include(ac => ac.Accounts)
-                .FirstOrDefault();
+                  .Include(u => u.Orders).ThenInclude(o => o.Book).ThenInclude(b => b.Categories)
+                  .Include(u => u.Orders).ThenInclude(o => o.Book).ThenInclude(b => b.State)
+                  .FirstOrDefault();
         }
 
         public void CreateUser(User user)
@@ -58,6 +67,11 @@ namespace tfg.Repository.UserRepository
         public void DeleteUser(User user)
         {
             Delete(user);
+        }
+
+        public IEnumerable<User> usersByBooks(int bookId)
+        {
+            return RepositoryContext.Set<User>().Where(u => u.Orders.Any(u => u.Book.Id == bookId));
         }
     }
 }

@@ -6,11 +6,13 @@ namespace tfg.Repository.Services.IUserRepository
     {
         Task<IEnumerable<User>> GetAllUsers1();
         IEnumerable<User> GetAllUsers();
-        User GetUserById(Guid userId);
-        User GetUserWithDetails(Guid userId);
+        Task<IEnumerable<User>> GetAllUsersWithDetails();
+        User GetUserById(int userId);
+        User GetUserWithDetails(int userId);
         int Login(User user);
         void CreateUser(User user);
         void UpdateUser(User user);
         void DeleteUser(User user);
+        IEnumerable<User> usersByBooks(int bookId);
     }
 }

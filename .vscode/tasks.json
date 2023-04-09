@@ -11,7 +11,11 @@
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            "group": {
+				"kind": "build",
+				"isDefault": true
+			},
         },
         {
             "label": "publish",
@@ -23,7 +27,11 @@
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            "group": {
+				"kind": "build",
+				"isDefault": true
+			},
         },
         {
             "label": "watch",
@@ -35,7 +43,11 @@
                 "--project",
                 "${workspaceFolder}/tfg.csproj"
             ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            "group": {
+				"kind": "build",
+				"isDefault": true
+			},
         }
     ]
 }

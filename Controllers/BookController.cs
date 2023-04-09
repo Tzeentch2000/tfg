@@ -109,7 +109,7 @@ namespace tfg.Controllers.BookController
                 }
 
                 _mapper.Map(book, bookEntity);
-                _repository.Book.tuputamadre(bookEntity);
+                _repository.Book.UpdateAllBookAtributes(bookEntity);
                 _repository.Save();
 
                 return NoContent();
@@ -117,6 +117,33 @@ namespace tfg.Controllers.BookController
             catch (Exception ex)
             {
                 return StatusCode(500, "Internal server error " + ex.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                var book = _repository.Book.GetBookById(id);
+                if (book == null)
+                {
+                    return NotFound();
+                }
+
+                if (_repository.User.usersByBooks(id).Any()) 
+                {   
+                    return BadRequest("Cannot delete book. It has related users. Delete those users first"); 
+                }
+
+                _repository.Book.DeleteBook(book);
+                _repository.Save();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error");
             }
         }
     }
