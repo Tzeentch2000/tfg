@@ -28,7 +28,7 @@ namespace tfg.Controllers.OrderController
         { 
             try 
             { 
-                var orders = _repository.Order.GetAllOrders(); 
+                var orders = _repository.Order.getAllOrdersWithDetails(); 
                 return Ok(orders); 
             } 
             catch (Exception ex) 
@@ -42,7 +42,7 @@ namespace tfg.Controllers.OrderController
         { 
             try 
             { 
-                var order = _repository.Order.GetOrderById(id); 
+                var order = _repository.Order.getOrderByIdWithDetails(id); 
                 if (order == null) 
                 { 
                     return NotFound(); 
@@ -59,7 +59,7 @@ namespace tfg.Controllers.OrderController
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody]Order order)
+        public IActionResult Create([FromBody]OrderForInsertDTO order)
         {
             try
             {
@@ -73,14 +73,15 @@ namespace tfg.Controllers.OrderController
                     return BadRequest("Invalid model object");
                 }
 
-                _repository.Order.CreateOrder(order);
+                var orderEntity = _mapper.Map<Order>(order);
+                _repository.Order.CreateOrderWithDetails(orderEntity);
                 _repository.Save();
 
-                return Created("created",order);
+                return Created("created",orderEntity);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, "Internal server error " + ex.Message);
             }
         }
 
@@ -95,11 +96,11 @@ namespace tfg.Controllers.OrderController
                     return NotFound();
                 }
 
-                Console.WriteLine($"GRUCCCCCCCCCCCCI: {DateTime.Now.Subtract(order.Date)}");
-                /*if (_repository.Book.booksByState(id).Any()) 
+                var totalHours = DateTime.Now.Subtract(order.Date).TotalHours-2;
+                if (totalHours>1) 
                 {
-                    return BadRequest("Cannot delete state. It has related books. Delete those books first"); 
-                }*/
+                    return BadRequest("Cannot delete order. It's been over an hour. You can return it once it arrives following the instructions"); 
+                }
 
                 /*_repository.Order.DeleteOrder(order);
                 _repository.Save();*/

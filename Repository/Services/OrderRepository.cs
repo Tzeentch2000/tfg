@@ -17,15 +17,37 @@ namespace tfg.Repository.OrderRepository
             return FindAll().ToList(); 
         }
 
+        public IEnumerable<Order> getAllOrdersWithDetails()
+        {
+            return FindAll()
+               .Include(o => o.Book).ThenInclude(b => b.Categories)
+               .Include(o => o.Book).ThenInclude(b => b.State)
+               .ToList();
+        }
+
         public Order GetOrderById(int orderId)
         {
             return FindByCondition(o => o.Id.Equals(orderId))
                 .FirstOrDefault();
         }
 
+        public Order getOrderByIdWithDetails(int orderId)
+        {
+            return FindByCondition(o => o.Id.Equals(orderId))
+                .Include(o => o.Book).ThenInclude(b => b.Categories)
+                .Include(o => o.Book).ThenInclude(b => b.State)
+                .FirstOrDefault();
+        }
+
         public void CreateOrder(Order order)
         {
             Create(order);
+        }
+
+        public Order CreateOrderWithDetails(Order model)
+        {
+             RepositoryContext.Set<Order>().Attach(model);
+             return model;
         }
 
         public void DeleteOrder(Order order)

@@ -9,8 +9,10 @@ namespace Mvc.AutoMapper
         {
             CreateMap<Category, CategoryDTO>().ReverseMap();
             CreateMap<Book, BookDTO>().ReverseMap();
+            CreateMap<Book,BookForInsertDTO>().ReverseMap();
             CreateMap<User, UserForInsertDTO>().ReverseMap();
             CreateMap<User, UserForUpdateDTO>().ReverseMap();
+            CreateMap<Order, OrderForInsertDTO>().ReverseMap();
         }
     }
 }

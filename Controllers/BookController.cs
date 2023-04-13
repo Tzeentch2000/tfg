@@ -62,7 +62,7 @@ namespace tfg.Controllers.BookController
 
         
         [HttpPost]
-        public IActionResult Create([FromBody]Book book)
+        public IActionResult Create([FromBody]BookForInsertDTO book)
         {
             try
             {
@@ -76,7 +76,8 @@ namespace tfg.Controllers.BookController
                     return BadRequest("Invalid model object");
                 }
 
-                _repository.Book.CreateBookWithDetails(book);
+                var bookEntity = _mapper.Map<Book>(book);
+                _repository.Book.CreateBookWithDetails(bookEntity);
                 _repository.Save();
 
                 return Created("created",book);
