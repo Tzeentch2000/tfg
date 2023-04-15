@@ -1,4 +1,5 @@
 using ContextDB;
+using Encrypt;
 using Microsoft.EntityFrameworkCore;
 using tfg.Repository.Base.RepositoryBase;
 using tfg.Repository.Services.IUserRepository;
@@ -38,7 +39,8 @@ namespace tfg.Repository.UserRepository
         }
 
         public int Login(User user){
-            var lUser = FindByCondition(u => u.Email == user.Email && u.Password == user.Password)
+            var encryptPassword = Hash.EncryptPassword(user.Password);
+            var lUser = FindByCondition(u => u.Email == user.Email && u.Password == encryptPassword)
             .FirstOrDefault();
             if(lUser == null){
                 return -1;

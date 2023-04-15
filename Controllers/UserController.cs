@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Wrapper;
+using Encrypt;
 
 namespace tfg.Controllers.UserController
 {
@@ -115,6 +116,7 @@ namespace tfg.Controllers.UserController
                 }
                 User userEntity = _mapper.Map<User>(user);
                 userEntity.IsAdmin = false;
+                userEntity.Password = Hash.EncryptPassword(userEntity.Password);
                 _repository.User.CreateUser(userEntity);
                 _repository.Save();
 
