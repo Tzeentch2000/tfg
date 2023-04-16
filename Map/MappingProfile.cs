@@ -12,7 +12,10 @@ namespace Mvc.AutoMapper
             CreateMap<Book,BookForInsertDTO>().ReverseMap();
             CreateMap<User, UserForInsertDTO>().ReverseMap();
             CreateMap<User, UserForUpdateDTO>().ReverseMap();
-            CreateMap<Order, OrderForInsertDTO>().ReverseMap();
+            CreateMap<Order, OrderForInsertDTO>().PreserveReferences();
+            CreateMap<OrderForInsertDTO, Order>().PreserveReferences();
+            CreateMap<User, UserResultDTO>().ReverseMap();
+            //CreateMap<List<Order>, List<OrderForInsertDTO>>().ReverseMap();
         }
     }
 }

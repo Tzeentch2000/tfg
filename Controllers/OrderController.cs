@@ -59,6 +59,33 @@ namespace tfg.Controllers.OrderController
         }
 
         [HttpPost]
+        public IActionResult CreateOrders([FromBody]IEnumerable<OrderForInsertDTO> orders)
+        {
+            try
+            {
+                if (orders == null)
+                {
+                    return BadRequest("Order object is null");
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Invalid model object");
+                }
+
+                var orderEntity = _mapper.Map<IEnumerable<Order>>(orders);
+                _repository.Order.createOrders(orderEntity);
+                _repository.Save();
+
+                return Created("created",orderEntity);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error " + ex.Message);
+            }
+        }
+
+        /*[Route("Create")]
         public IActionResult Create([FromBody]OrderForInsertDTO order)
         {
             try
@@ -83,7 +110,7 @@ namespace tfg.Controllers.OrderController
             {
                 return StatusCode(500, "Internal server error " + ex.Message);
             }
-        }
+        }*/
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)

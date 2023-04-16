@@ -8,6 +8,6 @@ public class Book{
     public double Price { get; set; }
     public string? Image { get; set; }
     public ICollection<Category>? Categories { get; set; }
-    public State State { get; set; }
+    public State? State { get; set; }
     public bool IsActive { get; set;}
 }

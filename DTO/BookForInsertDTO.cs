@@ -6,6 +6,6 @@ public class BookForInsertDTO{
     public double Price { get; set; }
     public string? Image { get; set; }
     public ICollection<CategoryDTO>? Categories { get; set; }
-    public State State { get; set; }
+    public State? State { get; set; }
     public bool IsActive { get; set;}
 }

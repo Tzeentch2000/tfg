@@ -80,7 +80,7 @@ namespace tfg.Controllers.BookController
                 _repository.Book.CreateBookWithDetails(bookEntity);
                 _repository.Save();
 
-                return Created("created",book);
+                return Created("created",bookEntity);
             }
             catch (Exception ex)
             {

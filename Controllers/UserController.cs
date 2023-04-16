@@ -32,8 +32,8 @@ namespace tfg.Controllers.UserController
             try 
             { 
                 var users = await _repository.User.GetAllUsersWithDetails(); 
-
-                return Ok(users); 
+                IEnumerable<UserResultDTO> userEntities = _mapper.Map<IEnumerable<UserResultDTO>>(users);
+                return Ok(userEntities); 
             } 
             catch (Exception ex) 
             { 

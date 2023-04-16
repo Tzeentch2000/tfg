@@ -39,6 +39,10 @@ namespace tfg.Repository.OrderRepository
                 .FirstOrDefault();
         }
 
+        public void createOrders(IEnumerable<Order> orders){
+            RepositoryContext.Set<Order>().AttachRange(orders);
+        }
+
         public void CreateOrder(Order order)
         {
             Create(order);
