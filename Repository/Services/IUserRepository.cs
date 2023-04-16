@@ -14,5 +14,6 @@ namespace tfg.Repository.Services.IUserRepository
         void UpdateUser(User user);
         void DeleteUser(User user);
         IEnumerable<User> usersByBooks(int bookId);
+        bool isUserAdmin(int id);
     }
 }

@@ -45,6 +45,8 @@ namespace tfg.Controllers.AuthController
                     return BadRequest("Incorrect Credentials");
                 }
 
+                var role = _repository.User.isUserAdmin(loginUser);
+
                 var jwt = _configuration.GetSection("Jwt").Get<Jwt>();
                 var claims = new[]
                 {
@@ -52,6 +54,7 @@ namespace tfg.Controllers.AuthController
                     new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Iat,DateTime.UtcNow.ToString()),
                     new Claim("id",loginUser.ToString()),
+                    new Claim("userRole",role.ToString()),
                 };
 
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Key));
@@ -61,7 +64,7 @@ namespace tfg.Controllers.AuthController
                     jwt.Issuer,
                     jwt.Audience,
                     claims,
-                    expires: DateTime.Now.AddMinutes(4),
+                    expires: DateTime.Now.AddDays(1),
                     signingCredentials: singIn
                 );
                 return Ok(new JwtSecurityTokenHandler().WriteToken(token));

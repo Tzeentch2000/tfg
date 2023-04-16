@@ -19,11 +19,14 @@ public class Jwt{
             }
 
             var id = identity.Claims.FirstOrDefault(x => x.Type == "id").Value;
+            var role = identity.Claims.FirstOrDefault(c => c.Type == "userRole").Value;
+
+            var userObjectResponse = new UserJWTDTO(Int32.Parse(id),Convert.ToBoolean(role));
 
             return new{
                     success=true,
                     message="Exit",
-                    result=id
+                    result=userObjectResponse
                 };
         } catch(Exception e){
             return new{

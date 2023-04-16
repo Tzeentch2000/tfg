@@ -75,5 +75,11 @@ namespace tfg.Repository.UserRepository
         {
             return RepositoryContext.Set<User>().Where(u => u.Orders.Any(u => u.Book.Id == bookId));
         }
+
+        public bool isUserAdmin(int id)
+        {
+            return FindByCondition(u => u.Id.Equals(id))
+                .FirstOrDefault().IsAdmin;
+        }
     }
 }

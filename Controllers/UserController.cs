@@ -24,7 +24,7 @@ namespace tfg.Controllers.UserController
             _configuration = configuration;
             _mapper = mapper;
         }
-        //[Authorize]
+        [Authorize]
         [HttpGet] 
         //[AllowAnonymous]
         public async Task<IActionResult> GetAllUsers() 
@@ -32,15 +32,15 @@ namespace tfg.Controllers.UserController
             try 
             { 
                 var users = await _repository.User.GetAllUsersWithDetails(); 
-                IEnumerable<UserResultDTO> userEntities = _mapper.Map<IEnumerable<UserResultDTO>>(users);
-                return Ok(userEntities); 
+                return Ok(users); 
             } 
             catch (Exception ex) 
             { 
-                return StatusCode(500, "Internal server error"); 
+                return StatusCode(500, "Internal server error " + ex.Message); 
             } 
         }
 
+        [Authorize]
         [HttpGet("{id}", Name = "UserById")] 
         public IActionResult GetById(int id) 
         { 
@@ -99,6 +99,7 @@ namespace tfg.Controllers.UserController
             }
         }*/
 
+
         [HttpPost]
         [Route("Create")]
         public IActionResult CreateUser([FromBody]UserForInsertDTO user)
@@ -128,19 +129,36 @@ namespace tfg.Controllers.UserController
             }
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody]UserForUpdateDTO user)
         {
             try
             {
+                var identity = HttpContext.User.Identity as ClaimsIdentity;
+                var rToken = Jwt.TokenValidation(identity);
+                if(!rToken.success){
+                    return BadRequest("Invalid Token");
+                }
                 if (user == null)
                 {
                     return BadRequest("User object is null");
                 }
 
+                if(id != user.Id){
+                    return BadRequest("The ids dont match");
+                }
+
                 if (!ModelState.IsValid)
                 {
                     return BadRequest("Invalid model object");
+                }
+
+                var tokenRole = rToken.result.IsAdmin;
+                var tokenId = rToken.result.Id;
+
+                if(!tokenRole && user.Id != tokenId){
+                    return BadRequest("Invalid Tokens");
                 }
 
                 var userEntity = _repository.User.GetUserById(id);
@@ -160,6 +178,7 @@ namespace tfg.Controllers.UserController
             }
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
