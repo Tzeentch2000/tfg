@@ -38,6 +38,11 @@ namespace tfg.Repository.OrderRepository
                 .Include(o => o.Book).ThenInclude(b => b.State)
                 .FirstOrDefault();
         }
+         public IEnumerable<Order> GetOrderByUserId(int userId)
+        {
+             return FindByCondition(o => o.UserId.Equals(userId))
+                .Include(o => o.Book).ToList();
+        }
 
         public void createOrders(IEnumerable<Order> orders){
             RepositoryContext.Set<Order>().AttachRange(orders);

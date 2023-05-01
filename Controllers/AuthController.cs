@@ -2,6 +2,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -15,15 +16,17 @@ namespace tfg.Controllers.AuthController
     { 
         private IRepositoryWrapper _repository;     
         public IConfiguration _configuration;   
-        public AuthController(IRepositoryWrapper repository,IConfiguration configuration) 
+        private IMapper _mapper;  
+        public AuthController(IRepositoryWrapper repository,IConfiguration configuration,IMapper mapper) 
         { 
             _repository = repository;
             _configuration = configuration;
+            _mapper = mapper;
         }
 
         [HttpPost]
         //[Route("Auth")]
-        public IActionResult Auth([FromBody]User user)
+        public IActionResult Auth([FromBody]UserForLoginDTO user)
         {
             try
             {
@@ -37,7 +40,8 @@ namespace tfg.Controllers.AuthController
                     return BadRequest("Invalid model object");
                 }
                 int loginUser = 0;
-                loginUser = _repository.User.Login(user);
+                var userEntity = _mapper.Map<User>(user);
+                loginUser = _repository.User.Login(userEntity);
                 //_repository.Save();
                 Console.WriteLine(loginUser);
 

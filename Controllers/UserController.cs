@@ -41,8 +41,8 @@ namespace tfg.Controllers.UserController
         }
 
         [Authorize]
-        [HttpGet("{id}", Name = "UserById")] 
-        public IActionResult GetById(int id) 
+        [HttpGet("/Details/{id}", Name = "UserByIdDetails")] 
+        public IActionResult GetByIdDetails(int id) 
         { 
             try 
             { 
@@ -62,6 +62,27 @@ namespace tfg.Controllers.UserController
             } 
         }
 
+        [Authorize]
+        [HttpGet("{id}", Name = "UserById")] 
+        public IActionResult GetById(int id) 
+        { 
+            try 
+            { 
+                var user = _repository.User.GetUserById(id); 
+                if (user == null) 
+                { 
+                    return NotFound(); 
+                } 
+                else 
+                { 
+                    return Ok(user); 
+                } 
+            } 
+            catch (Exception ex) 
+            { 
+                return StatusCode(500, "Internal server error"); 
+            } 
+        }
         /*[HttpPost]
         [Route("Login")]
         public IActionResult Login([FromBody]User user)

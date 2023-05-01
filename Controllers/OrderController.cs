@@ -24,6 +24,7 @@ namespace tfg.Controllers.OrderController
         }
         
         [HttpGet] 
+        [Authorize]
         public IActionResult GetAll() 
         { 
             try 
@@ -38,6 +39,7 @@ namespace tfg.Controllers.OrderController
         }
 
         [HttpGet("{id}", Name = "OrderById")] 
+        [Authorize]
         public IActionResult GetById(int id) 
         { 
             try 
@@ -50,6 +52,28 @@ namespace tfg.Controllers.OrderController
                 else 
                 { 
                     return Ok(order); 
+                } 
+            } 
+            catch (Exception ex) 
+            { 
+                return StatusCode(500, "Internal server error"); 
+            } 
+        }
+
+        [HttpGet("/Order/UserId/{id}", Name = "OrderByUserId")] 
+        [Authorize]
+        public IActionResult GetByUserId(int id) 
+        { 
+            try 
+            { 
+                var orders = _repository.Order.GetOrderByUserId(id); 
+                if (orders == null) 
+                { 
+                    return NotFound(); 
+                } 
+                else 
+                { 
+                    return Ok(orders); 
                 } 
             } 
             catch (Exception ex) 
