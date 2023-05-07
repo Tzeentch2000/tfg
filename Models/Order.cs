@@ -11,7 +11,7 @@ public class Order{
     [ForeignKey("Book")]
     public int BookId { get; set; }
     public Book Book { get; set; }
-
+    //public string? Direction { get; set; }
     [ForeignKey("Usuario")]
     public int UserId {get;set;}
     public User? User {get;set;}

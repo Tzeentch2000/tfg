@@ -83,6 +83,7 @@ namespace tfg.Controllers.OrderController
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult CreateOrders([FromBody]IEnumerable<OrderForInsertDTO> orders)
         {
             try

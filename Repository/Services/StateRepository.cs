@@ -19,6 +19,14 @@ namespace tfg.Repository.StateRepository
                 .ToList(); 
         }
 
+        public IEnumerable<State> GetActiveStates()
+        {
+              return FindAll()
+                .OrderBy(s => s.Name)
+                .Where(state => state.IsActive)
+                .ToList(); 
+        }
+
         public State GetStateById(int stateId)
         {
             return FindByCondition(u => u.Id.Equals(stateId))

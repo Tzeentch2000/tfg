@@ -8,5 +8,6 @@ public class User{
     public string? Surname { get; set; }
     public int Phone { get; set; }
     public bool IsAdmin { get; set;}
+    //public string? Direction { get; set; }
     public ICollection<Order>? Orders{ get; set; }
 }

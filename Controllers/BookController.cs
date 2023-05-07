@@ -37,6 +37,21 @@ namespace tfg.Controllers.BookController
             } 
         }
 
+        [HttpGet ("/Active/Books", Name = "ActiveBooks")]  
+        public IActionResult GetActiveBooks() 
+        { 
+            try 
+            { 
+                var books = _repository.Book.GetActiveBooksWithDetails(); 
+                var booksResult = _mapper.Map<IEnumerable<BookDTO>>(books);
+                return Ok(booksResult); 
+            } 
+            catch (Exception ex) 
+            { 
+                return StatusCode(500, "Internal server error"); 
+            } 
+        }
+
         [HttpGet("{id}", Name = "BookById")] 
         public IActionResult GetById(int id) 
         { 

@@ -37,6 +37,20 @@ namespace tfg.Controllers.StateController
             } 
         }
 
+        [HttpGet("/Active/States", Name = "ActiveStates")] 
+        public IActionResult GetActiveAll() 
+        { 
+            try 
+            { 
+                var states = _repository.State.GetActiveStates(); 
+                return Ok(states); 
+            } 
+            catch (Exception ex) 
+            { 
+                return StatusCode(500, "Internal server error"); 
+            } 
+        }
+
         [HttpGet("{id}", Name = "StateById")] 
         public IActionResult GetById(int id) 
         { 

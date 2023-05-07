@@ -19,6 +19,14 @@ namespace tfg.Repository.UserRepository
                 .ToList(); 
         }
 
+        public IEnumerable<Category> GetActiveCategories()
+        {
+            return FindAll()
+                .OrderBy(c => c.Name)
+                .Where(c => c.IsActive)
+                .ToList();
+        }
+
         public Category GetCategoryById(int categoryId)
         {
             return FindByCondition(u => u.Id.Equals(categoryId))

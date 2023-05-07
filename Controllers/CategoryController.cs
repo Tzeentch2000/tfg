@@ -39,6 +39,21 @@ namespace tfg.Controllers.CategoryController
             } 
         }
 
+        [HttpGet("/Active/Categories", Name = "ActiveCategories")] 
+        public IActionResult GetActiveAll() 
+        { 
+            try 
+            { 
+                var categories = _repository.Category.GetActiveCategories(); 
+                var categoriesResult = _mapper.Map<IEnumerable<CategoryDTO>>(categories);
+                return Ok(categoriesResult); 
+            } 
+            catch (Exception ex) 
+            { 
+                return StatusCode(500, "Internal server error"); 
+            } 
+        }
+
         [HttpGet("{id}", Name = "CategoryById")] 
         public IActionResult GetById(int id) 
         { 

@@ -4,6 +4,7 @@ namespace tfg.Repository.Services.IBookRepository
     {
         IEnumerable<Book> GetAllBooks();
         IEnumerable<Book> GetAllBooksWithDetails();
+        IEnumerable<Book> GetActiveBooksWithDetails();
         Book GetBookById(int id);
         Book GetBookWithDetails(int id);
         void CreateBook(Book model);

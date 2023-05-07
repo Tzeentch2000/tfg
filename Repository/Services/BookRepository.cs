@@ -29,6 +29,15 @@ namespace tfg.Repository.BookRepository
                 .ToList(); 
         }
 
+        public IEnumerable<Book> GetActiveBooksWithDetails()
+        {
+              return FindAll()
+                .OrderBy(s => s.Name)
+                .Include(state => state.State)
+                .Include(category => category.Categories)
+                .Where(book => book.IsActive).ToList();
+        }
+
         public Book GetBookById(int bookId)
         {
             return FindByCondition(u => u.Id.Equals(bookId))
