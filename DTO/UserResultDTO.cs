@@ -5,6 +5,7 @@ public class UserResultDTO{
     public string? Name { get; set; }
     public string? Surname { get; set; }
     public int Phone { get; set; }
+    public string? Direction { get; set; }
     public bool IsAdmin { get; set;}
     public ICollection<OrderForResultDTO>? Orders{ get; set; }
 }

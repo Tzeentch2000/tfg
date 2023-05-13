@@ -77,7 +77,7 @@ namespace tfg.Controllers.CategoryController
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody]CategoryDTO category)
+        public IActionResult Create([FromBody]CategoryForInsertDTO category)
         {
             try
             {

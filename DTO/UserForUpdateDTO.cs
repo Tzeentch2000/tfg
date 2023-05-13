@@ -5,6 +5,7 @@ public class UserForUpdateDTO{
     public string? Password { get; set; }
     public string? Name { get; set; }
     public string? Surname { get; set; }
+    public string? Direction { get; set; }
     public int Phone { get; set; }
     public bool IsAdmin { get; set; }
 }

@@ -73,7 +73,7 @@ namespace tfg.Controllers.StateController
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody]State state)
+        public IActionResult Create([FromBody]StateForInsertDTO state)
         {
             try
             {
@@ -87,7 +87,8 @@ namespace tfg.Controllers.StateController
                     return BadRequest("Invalid model object");
                 }
 
-                _repository.State.CreateState(state);
+                var stateEntity = _mapper.Map<State>(state);
+                _repository.State.CreateState(stateEntity);
                 _repository.Save();
 
                 return Created("created",state);
@@ -99,7 +100,7 @@ namespace tfg.Controllers.StateController
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody]State state)
+        public IActionResult Update(int id, [FromBody]StateForInsertDTO state)
         {
             try
             {
@@ -119,7 +120,8 @@ namespace tfg.Controllers.StateController
                     return NotFound();
                 }
 
-                _repository.State.UpdateState(state);
+                var stateEntityEdit = _mapper.Map<State>(state);
+                _repository.State.UpdateState(stateEntityEdit);
                 _repository.Save();
 
                 return NoContent();

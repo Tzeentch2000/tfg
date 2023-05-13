@@ -8,6 +8,8 @@ namespace Mvc.AutoMapper
         public AutoMapperProfile()
         {
             CreateMap<Category, CategoryDTO>().ReverseMap();
+            CreateMap<Category, CategoryForInsertDTO>().ReverseMap();
+            CreateMap<State, StateForInsertDTO>().ReverseMap();
             CreateMap<Book, BookDTO>().ReverseMap();
             CreateMap<Book,BookForInsertDTO>().ReverseMap();
             CreateMap<User, UserForInsertDTO>().ReverseMap();
