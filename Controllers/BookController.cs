@@ -77,10 +77,18 @@ namespace tfg.Controllers.BookController
 
         
         [HttpPost]
+        [Authorize]
         public IActionResult Create([FromBody]BookForInsertDTO book)
         {
             try
             {
+                var identity = HttpContext.User.Identity as ClaimsIdentity;
+                var rToken = Jwt.TokenValidation(identity);
+
+                if(!rToken.success){
+                    return BadRequest("Invalid Token");
+                }
+
                 if (book == null)
                 {
                     return BadRequest("Owner object is null");
@@ -89,6 +97,11 @@ namespace tfg.Controllers.BookController
                 if (!ModelState.IsValid)
                 {
                     return BadRequest("Invalid model object");
+                }
+
+                var tokenRole = rToken.result.IsAdmin;
+                if(!tokenRole){
+                    return BadRequest("Invalid Tokens");
                 }
 
                 var bookEntity = _mapper.Map<Book>(book);
@@ -104,10 +117,19 @@ namespace tfg.Controllers.BookController
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public IActionResult Update(int id, [FromBody]BookDTO book)
         {
             try
             {
+
+                var identity = HttpContext.User.Identity as ClaimsIdentity;
+                var rToken = Jwt.TokenValidation(identity);
+
+                if(!rToken.success){
+                    return BadRequest("Invalid Token");
+                }
+
                 if (book == null)
                 {
                     return BadRequest("Book object is null");
@@ -116,6 +138,11 @@ namespace tfg.Controllers.BookController
                 if (!ModelState.IsValid)
                 {
                     return BadRequest("Invalid model object");
+                }
+
+                var tokenRole = rToken.result.IsAdmin;
+                if(!tokenRole){
+                    return BadRequest("Invalid Tokens");
                 }
 
                 var bookEntity = _repository.Book.GetBookById(id);
@@ -137,10 +164,23 @@ namespace tfg.Controllers.BookController
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             try
             {
+                var identity = HttpContext.User.Identity as ClaimsIdentity;
+                var rToken = Jwt.TokenValidation(identity);
+
+                if(!rToken.success){
+                    return BadRequest("Invalid Token");
+                }
+
+                var tokenRole = rToken.result.IsAdmin;
+                if(!tokenRole){
+                    return BadRequest("Invalid Tokens");
+                }
+
                 var book = _repository.Book.GetBookById(id);
                 if (book == null)
                 {
