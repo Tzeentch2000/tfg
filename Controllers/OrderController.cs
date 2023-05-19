@@ -25,11 +25,16 @@ namespace tfg.Controllers.OrderController
         
         [HttpGet] 
         [Authorize]
-        public IActionResult GetAll() 
+        public IActionResult GetAll([FromQuery] string? categoryId) 
         { 
             try 
             { 
-                var orders = _repository.Order.getAllOrdersWithDetails(); 
+                IEnumerable<Order> orders =  new List<Order>();
+                if(categoryId != null){
+                    orders = _repository.Order.getOrdersByCategories(int.Parse(categoryId));
+                } else {
+                    orders = _repository.Order.getAllOrdersWithDetails(); 
+                }
                 return Ok(orders); 
             } 
             catch (Exception ex) 
@@ -62,11 +67,20 @@ namespace tfg.Controllers.OrderController
 
         [HttpGet("/Order/UserId/{id}", Name = "OrderByUserId")] 
         [Authorize]
-        public IActionResult GetByUserId(int id) 
+        public IActionResult GetByUserId(int id,[FromQuery] string? orderBy,[FromQuery] string? orderType) 
         { 
             try 
             { 
-                var orders = _repository.Order.GetOrderByUserId(id); 
+                IEnumerable<Order> orders =  new List<Order>();
+                if(orderBy.Equals("date")){
+                    if(orderType.Equals("descending")){
+                        orders = _repository.Order.getOrdersByDateDescending(id); 
+                    } else {
+                        orders = _repository.Order.getOrdersByDateAscending(id); 
+                    }
+                } else {
+                    orders = _repository.Order.GetOrderByUserId(id); 
+                }
                 if (orders == null) 
                 { 
                     return NotFound(); 

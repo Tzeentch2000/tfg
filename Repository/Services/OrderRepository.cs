@@ -63,5 +63,26 @@ namespace tfg.Repository.OrderRepository
         {
             Delete(order);
         }
+
+        public IEnumerable<Order> getOrdersByDateAscending(int id)
+        {
+            return FindByCondition(o => o.UserId.Equals(id))
+            .Include(o => o.Book).OrderBy(o => o.Date).ToList();
+        }
+
+        public IEnumerable<Order> getOrdersByDateDescending(int id)
+        {
+            return FindByCondition(o => o.UserId.Equals(id))
+            .Include(o => o.Book).OrderByDescending(o => o.Date).ToList();
+        }
+
+        public IEnumerable<Order> getOrdersByCategories(int id)
+        {
+            return FindAll()
+               .Include(o => o.Book).ThenInclude(b => b.Categories)
+               .Include(o => o.Book).ThenInclude(b => b.State)
+               .Where(o => o.Book.Categories.Any(c => c.Id == id))
+               .ToList();
+        }
     }
 }

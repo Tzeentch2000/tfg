@@ -12,5 +12,8 @@ namespace tfg.Repository.Services.IOrderRepository
         Order CreateOrderWithDetails(Order model);
         //void UpdateOrder(State model);
         void DeleteOrder(Order model);
+        IEnumerable<Order> getOrdersByDateAscending(int id);
+        IEnumerable<Order> getOrdersByDateDescending(int id);
+        IEnumerable<Order> getOrdersByCategories(int id);
     }
 }
