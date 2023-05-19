@@ -1,0 +1,2 @@
+2023-05-19 21:29:37.098 +02:00 [ERR] Error in authentication
+2023-05-19 21:47:02.935 +02:00 [ERR] Cannot delete book

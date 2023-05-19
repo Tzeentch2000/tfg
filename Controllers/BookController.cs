@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using Wrapper;
 
 namespace tfg.Controllers.BookController
@@ -33,6 +34,7 @@ namespace tfg.Controllers.BookController
             } 
             catch (Exception ex) 
             { 
+                Log.Error(ex, "Error");
                 return StatusCode(500, "Internal server error"); 
             } 
         }
@@ -48,6 +50,7 @@ namespace tfg.Controllers.BookController
             } 
             catch (Exception ex) 
             { 
+                Log.Error(ex, "Error");
                 return StatusCode(500, "Internal server error"); 
             } 
         }
@@ -70,6 +73,7 @@ namespace tfg.Controllers.BookController
             } 
             catch (Exception ex) 
             { 
+                Log.Error(ex, "Error");
                 return StatusCode(500, "Internal server error"); 
             } 
         }
@@ -112,6 +116,7 @@ namespace tfg.Controllers.BookController
             }
             catch (Exception ex)
             {
+                Log.Error(ex, "Error");
                 return StatusCode(500, "Internal server error");
             }
         }
@@ -159,6 +164,7 @@ namespace tfg.Controllers.BookController
             }
             catch (Exception ex)
             {
+                Log.Error(ex, "Error");
                 return StatusCode(500, "Internal server error " + ex.Message);
             }
         }
@@ -189,6 +195,7 @@ namespace tfg.Controllers.BookController
 
                 if (_repository.User.usersByBooks(id).Any()) 
                 {   
+                    Log.Error("Cannot delete book");
                     return BadRequest("Cannot delete book. It has related users. Delete those users first"); 
                 }
 
@@ -199,6 +206,7 @@ namespace tfg.Controllers.BookController
             }
             catch (Exception ex)
             {
+                Log.Error(ex, "Error");
                 return StatusCode(500, "Internal server error");
             }
         }

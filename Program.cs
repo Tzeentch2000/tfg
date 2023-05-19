@@ -7,6 +7,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
+using Serilog;
+using Serilog.Events;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -91,4 +93,21 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+// Configuración del logger
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.File("error/log.txt", restrictedToMinimumLevel: LogEventLevel.Error)
+    .CreateLogger();
+
+try
+{
+    app.Run();
+}
+catch (Exception ex)
+{
+    // Registrar el error en el log
+    Log.Error(ex, "Unhandled Exception");
+}
+finally
+{
+    Log.CloseAndFlush();
+}

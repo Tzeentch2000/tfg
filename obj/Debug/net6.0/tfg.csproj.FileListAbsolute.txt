@@ -180,3 +180,5 @@ C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\obj\Debug\net6.0\tfg.pdb
 C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\obj\Debug\net6.0\tfg.genruntimeconfig.cache
 C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\obj\Debug\net6.0\ref\tfg.dll
 C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\bin\Debug\net6.0\Serilog.dll
+C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\bin\Debug\net6.0\Serilog.Sinks.File.dll

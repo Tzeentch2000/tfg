@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using Wrapper;
 
 namespace tfg.Controllers.CategoryController
@@ -35,6 +36,7 @@ namespace tfg.Controllers.CategoryController
             } 
             catch (Exception ex) 
             { 
+                Log.Error(ex, "Error");
                 return StatusCode(500, "Internal server error"); 
             } 
         }
@@ -50,6 +52,7 @@ namespace tfg.Controllers.CategoryController
             } 
             catch (Exception ex) 
             { 
+                Log.Error(ex, "Error");
                 return StatusCode(500, "Internal server error"); 
             } 
         }
@@ -72,6 +75,7 @@ namespace tfg.Controllers.CategoryController
             } 
             catch (Exception ex) 
             { 
+                Log.Error(ex, "Error");
                 return StatusCode(500, "Internal server error"); 
             } 
         }
@@ -99,6 +103,7 @@ namespace tfg.Controllers.CategoryController
             }
             catch (Exception ex)
             {
+                Log.Error(ex, "Error");
                 return StatusCode(500, "Internal server error");
             }
         }
@@ -131,6 +136,7 @@ namespace tfg.Controllers.CategoryController
             }
             catch (Exception ex)
             {
+                Log.Error(ex, "Error");
                 return StatusCode(500, "Internal server error");
             }
         }
@@ -158,6 +164,7 @@ namespace tfg.Controllers.CategoryController
             }
             catch (Exception ex)
             {
+                Log.Error(ex, "Error");
                 return StatusCode(500, "Internal server error");
             }
         }

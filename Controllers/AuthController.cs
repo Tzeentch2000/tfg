@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using Wrapper;
 
 namespace tfg.Controllers.AuthController
@@ -46,6 +47,7 @@ namespace tfg.Controllers.AuthController
                 Console.WriteLine(loginUser);
 
                 if(loginUser <= 0 || loginUser == null){
+                    Log.Error("Error in authentication");
                     return BadRequest("Incorrect Credentials");
                 }
 
@@ -75,6 +77,7 @@ namespace tfg.Controllers.AuthController
             }
             catch (Exception ex)
             {
+                Log.Error(ex, "Error in authentication");
                 return StatusCode(500, "Internal server error "+ex.Message);
             }
         }

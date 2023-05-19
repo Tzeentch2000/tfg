@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Wrapper;
 using Encrypt;
+using Serilog;
 
 namespace tfg.Controllers.UserController
 {
@@ -36,6 +37,7 @@ namespace tfg.Controllers.UserController
             } 
             catch (Exception ex) 
             { 
+                Log.Error(ex, "Error");
                 return StatusCode(500, "Internal server error " + ex.Message); 
             } 
         }
@@ -58,6 +60,7 @@ namespace tfg.Controllers.UserController
             } 
             catch (Exception ex) 
             { 
+                Log.Error(ex, "Error");
                 return StatusCode(500, "Internal server error"); 
             } 
         }
@@ -80,6 +83,7 @@ namespace tfg.Controllers.UserController
             } 
             catch (Exception ex) 
             { 
+                Log.Error(ex, "Error");
                 return StatusCode(500, "Internal server error"); 
             } 
         }
@@ -146,6 +150,7 @@ namespace tfg.Controllers.UserController
             }
             catch (Exception ex)
             {
+                Log.Error(ex, "Error");
                 return StatusCode(500, "Internal server error " + ex.Message);
             }
         }
@@ -195,6 +200,7 @@ namespace tfg.Controllers.UserController
             }
             catch (Exception ex)
             {
+                Log.Error(ex, "Error");
                 return StatusCode(500, "Internal server error " + ex.Message);
             }
         }
@@ -218,6 +224,7 @@ namespace tfg.Controllers.UserController
             }
             catch (Exception ex)
             {
+                Log.Error(ex, "Error");
                 return StatusCode(500, "Internal server error");
             }
         }
