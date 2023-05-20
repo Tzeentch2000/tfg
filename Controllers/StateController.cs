@@ -81,6 +81,20 @@ namespace tfg.Controllers.StateController
         {
             try
             {
+                var identity = HttpContext.User.Identity as ClaimsIdentity;
+                var rToken = Jwt.TokenValidation(identity);
+
+                if(!rToken.success){
+                    Log.Error("Invalid Tokens");
+                    return BadRequest("Invalid Token");
+                }
+
+                var tokenRole = rToken.result.IsAdmin;
+                if(!tokenRole){
+                     Log.Error("Invalid Tokens");
+                    return BadRequest("Invalid Tokens");
+                }
+
                 if (state == null)
                 {
                     return BadRequest("Owner object is null");
@@ -109,6 +123,20 @@ namespace tfg.Controllers.StateController
         {
             try
             {
+                var identity = HttpContext.User.Identity as ClaimsIdentity;
+                var rToken = Jwt.TokenValidation(identity);
+
+                if(!rToken.success){
+                    Log.Error("Invalid Tokens");
+                    return BadRequest("Invalid Token");
+                }
+
+                var tokenRole = rToken.result.IsAdmin;
+                if(!tokenRole){
+                     Log.Error("Invalid Tokens");
+                    return BadRequest("Invalid Tokens");
+                }
+
                 if (state == null)
                 {
                     return BadRequest("Owner object is null");
@@ -143,6 +171,20 @@ namespace tfg.Controllers.StateController
         {
             try
             {
+                var identity = HttpContext.User.Identity as ClaimsIdentity;
+                var rToken = Jwt.TokenValidation(identity);
+
+                if(!rToken.success){
+                    Log.Error("Invalid Tokens");
+                    return BadRequest("Invalid Token");
+                }
+
+                var tokenRole = rToken.result.IsAdmin;
+                if(!tokenRole){
+                     Log.Error("Invalid Tokens");
+                    return BadRequest("Invalid Tokens");
+                }
+                
                 var state = _repository.State.GetStateById(id);
                 if (state == null)
                 {

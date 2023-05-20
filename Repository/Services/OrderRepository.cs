@@ -84,5 +84,17 @@ namespace tfg.Repository.OrderRepository
                .Where(o => o.Book.Categories.Any(c => c.Id == id))
                .ToList();
         }
+
+        public IEnumerable<Order> getOrdersByPriceAscending(int id)
+        {
+             return FindByCondition(o => o.UserId.Equals(id))
+            .Include(o => o.Book).OrderBy(o => (o.Amount*o.Book.Price)).ToList();
+        }
+
+        public IEnumerable<Order> getOrdersByPriceDescending(int id)
+        {
+             return FindByCondition(o => o.UserId.Equals(id))
+            .Include(o => o.Book).OrderByDescending(o => (o.Amount*o.Book.Price)).ToList();
+        }
     }
 }

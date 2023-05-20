@@ -75,11 +75,20 @@ namespace tfg.Controllers.OrderController
             try 
             { 
                 IEnumerable<Order> orders =  new List<Order>();
-                if(orderBy.Equals("date")){
-                    if(orderType.Equals("descending")){
-                        orders = _repository.Order.getOrdersByDateDescending(id); 
+
+                if(orderBy != null){
+                    if(orderBy.Equals("date")){
+                        if(orderType != null && orderType.Equals("descending")){
+                            orders = _repository.Order.getOrdersByDateDescending(id); 
+                        } else {
+                            orders = _repository.Order.getOrdersByDateAscending(id); 
+                        }
                     } else {
-                        orders = _repository.Order.getOrdersByDateAscending(id); 
+                          if(orderType != null && orderType.Equals("descending")){
+                            orders = _repository.Order.getOrdersByPriceDescending(id); 
+                        } else {
+                            orders = _repository.Order.getOrdersByPriceAscending(id);  
+                        }
                     }
                 } else {
                     orders = _repository.Order.GetOrderByUserId(id); 
@@ -96,7 +105,7 @@ namespace tfg.Controllers.OrderController
             catch (Exception ex) 
             { 
                 Log.Error(ex, "Error");
-                return StatusCode(500, "Internal server error"); 
+                return StatusCode(500, $"Internal server error, {ex}"); 
             } 
         }
 

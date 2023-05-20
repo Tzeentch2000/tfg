@@ -105,6 +105,7 @@ namespace tfg.Controllers.BookController
 
                 var tokenRole = rToken.result.IsAdmin;
                 if(!tokenRole){
+                    Log.Error("Invalid Tokens");
                     return BadRequest("Invalid Tokens");
                 }
 
@@ -147,6 +148,7 @@ namespace tfg.Controllers.BookController
 
                 var tokenRole = rToken.result.IsAdmin;
                 if(!tokenRole){
+                    Log.Error("Invalid Tokens");
                     return BadRequest("Invalid Tokens");
                 }
 
@@ -179,11 +181,13 @@ namespace tfg.Controllers.BookController
                 var rToken = Jwt.TokenValidation(identity);
 
                 if(!rToken.success){
+                    Log.Error("Invalid Tokens");
                     return BadRequest("Invalid Token");
                 }
 
                 var tokenRole = rToken.result.IsAdmin;
                 if(!tokenRole){
+                    Log.Error("Invalid Tokens");
                     return BadRequest("Invalid Tokens");
                 }
 

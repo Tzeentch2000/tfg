@@ -81,17 +81,34 @@ namespace tfg.Controllers.CategoryController
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Create([FromBody]CategoryForInsertDTO category)
         {
             try
             {
+                var identity = HttpContext.User.Identity as ClaimsIdentity;
+                var rToken = Jwt.TokenValidation(identity);
+
+                if(!rToken.success){
+                    Log.Error("Invalid Tokens");
+                    return BadRequest("Invalid Token");
+                }
+
+                var tokenRole = rToken.result.IsAdmin;
+                if(!tokenRole){
+                     Log.Error("Invalid Tokens");
+                    return BadRequest("Invalid Tokens");
+                }
+
                 if (category == null)
                 {
+                     Log.Error("Owner object is null");
                     return BadRequest("Owner object is null");
                 }
 
                 if (!ModelState.IsValid)
                 {
+                    Log.Error("Invalid model object");
                     return BadRequest("Invalid model object");
                 }
 
@@ -109,10 +126,24 @@ namespace tfg.Controllers.CategoryController
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public IActionResult Update(int id, [FromBody]Category category)
         {
             try
             {
+                var identity = HttpContext.User.Identity as ClaimsIdentity;
+                var rToken = Jwt.TokenValidation(identity);
+
+                if(!rToken.success){
+                    Log.Error("Invalid Tokens");
+                    return BadRequest("Invalid Token");
+                }
+
+                var tokenRole = rToken.result.IsAdmin;
+                if(!tokenRole){
+                     Log.Error("Invalid Tokens");
+                    return BadRequest("Invalid Tokens");
+                }
                 if (category == null)
                 {
                     return BadRequest("Owner object is null");
@@ -142,10 +173,24 @@ namespace tfg.Controllers.CategoryController
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             try
             {
+                var identity = HttpContext.User.Identity as ClaimsIdentity;
+                var rToken = Jwt.TokenValidation(identity);
+
+                if(!rToken.success){
+                    Log.Error("Invalid Tokens");
+                    return BadRequest("Invalid Token");
+                }
+
+                var tokenRole = rToken.result.IsAdmin;
+                if(!tokenRole){
+                     Log.Error("Invalid Tokens");
+                    return BadRequest("Invalid Tokens");
+                }
                 var category = _repository.Category.GetCategoryById(id);
                 if (category == null)
                 {
