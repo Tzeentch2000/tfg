@@ -1,0 +1,49 @@
+version: '3.4'
+
+networks:
+  dev:
+    driver: bridge
+
+services:
+  demo-app:
+    depends_on:
+      - "app_db"
+    container_name: api-compose
+    ports:
+      - "6677:5162"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - ConnectionStrings__PostgresqlConnection=User ID='postgres';Password='sanvalero12';Server='app_db';Port=5432;Database='Tfg7'; IntegratedSecurity=true;Pooling=true;
+      - ASPNETCORE_URLS=http://+:5162
+    networks:
+      - dev
+
+  react-app:
+    container_name: react-compose
+    ports:
+      - "3000:3000"
+    build:
+      context: ../tfgCliente/tfgcliente
+      dockerfile: Dockerfile
+    networks:
+      - dev
+
+  app_db:
+    image: postgres
+    container_name: app_db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=sanvalero12
+      - POSTGRES_DB=Tfg7
+    ports:
+      - 7766:5432
+    restart: always
+    volumes:
+      - app_data:/var/lib/postgresql/data
+    networks:
+      - dev
+
+volumes:
+  app_data:
