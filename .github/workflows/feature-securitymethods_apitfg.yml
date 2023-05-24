@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'APITfg'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DA9E99CBC4EE48028B314F5BC016D3FC }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_FE93BDCE70A1468B838431667854E4F3 }}
           package: .
