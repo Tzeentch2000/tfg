@@ -13,6 +13,8 @@ using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//"User ID=postgres;Password=sanvalero12;Server=localhost;Port=5432;Database=Tfg7; IntegratedSecurity=true;Pooling=true;"
+
 // Add services to the container.
 // Database connection
 var connectionString = builder.Configuration.GetConnectionString("PostgreSQLConnection");
