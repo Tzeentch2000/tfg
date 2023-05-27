@@ -70,7 +70,7 @@ namespace tfg.Controllers.AuthController
                     jwt.Issuer,
                     jwt.Audience,
                     claims,
-                    expires: DateTime.Now.AddDays(1),
+                    expires: DateTime.Now.AddDays(10),
                     signingCredentials: singIn
                 );
                 return Ok(new JwtSecurityTokenHandler().WriteToken(token));

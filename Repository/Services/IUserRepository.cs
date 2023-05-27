@@ -9,6 +9,7 @@ namespace tfg.Repository.Services.IUserRepository
         Task<IEnumerable<User>> GetAllUsersWithDetails();
         User GetUserById(int userId);
         User GetUserWithDetails(int userId);
+        int CheckUsername(string username);
         int Login(User user);
         void CreateUser(User user);
         void UpdateUser(User user);

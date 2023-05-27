@@ -124,6 +124,20 @@ namespace tfg.Controllers.UserController
             }
         }*/
 
+        [HttpGet("/CheckUsername", Name = "CheckUsername")] 
+        public IActionResult CheckUsername(string username) 
+        { 
+            try 
+            { 
+                var user = _repository.User.CheckUsername(username); 
+                return Ok(user); 
+            } 
+            catch (Exception ex) 
+            { 
+                Log.Error(ex, "Error");
+                return StatusCode(500, "Internal server error"); 
+            } 
+        }
 
         [HttpPost]
         [Route("Create")]

@@ -81,5 +81,15 @@ namespace tfg.Repository.UserRepository
             return FindByCondition(u => u.Id.Equals(id))
                 .FirstOrDefault().IsAdmin;
         }
+
+        public int CheckUsername(string username)
+        {
+            var lUser = FindByCondition(u => u.Email == username)
+            .FirstOrDefault();
+            if(lUser == null){
+                return -1;
+            }
+            return lUser.Id;
+        }
     }
 }
