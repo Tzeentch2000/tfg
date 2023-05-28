@@ -109,7 +109,7 @@ namespace tfg.Controllers.StateController
                 _repository.State.CreateState(stateEntity);
                 _repository.Save();
 
-                return Created("created",state);
+                return Created("created",stateEntity);
             }
             catch (Exception ex)
             {
