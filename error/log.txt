@@ -1,0 +1,70 @@
+2023-05-19 21:29:37.098 +02:00 [ERR] Error in authentication
+2023-05-19 21:47:02.935 +02:00 [ERR] Cannot delete book
+2023-05-20 13:00:44.277 +02:00 [ERR] Error
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at tfg.Controllers.OrderController.OrderController.GetByUserId(Int32 id, String orderBy, String orderType) in C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\Controllers\OrderController.cs:line 78
+2023-05-20 13:00:44.347 +02:00 [ERR] Error
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at tfg.Controllers.OrderController.OrderController.GetByUserId(Int32 id, String orderBy, String orderType) in C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\Controllers\OrderController.cs:line 78
+2023-05-20 13:00:44.349 +02:00 [ERR] Error
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at tfg.Controllers.OrderController.OrderController.GetByUserId(Int32 id, String orderBy, String orderType) in C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\Controllers\OrderController.cs:line 78
+2023-05-20 13:00:47.836 +02:00 [ERR] Error
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at tfg.Controllers.OrderController.OrderController.GetByUserId(Int32 id, String orderBy, String orderType) in C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\Controllers\OrderController.cs:line 78
+2023-05-20 13:01:02.368 +02:00 [ERR] Error
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at tfg.Controllers.OrderController.OrderController.GetByUserId(Int32 id, String orderBy, String orderType) in C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\Controllers\OrderController.cs:line 78
+2023-05-20 13:01:27.498 +02:00 [ERR] Error
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at tfg.Controllers.OrderController.OrderController.GetByUserId(Int32 id, String orderBy, String orderType) in C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\Controllers\OrderController.cs:line 78
+2023-05-20 13:02:12.095 +02:00 [ERR] Error
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at tfg.Controllers.OrderController.OrderController.GetByUserId(Int32 id, String orderBy, String orderType) in C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\Controllers\OrderController.cs:line 79
+2023-05-20 13:02:14.133 +02:00 [ERR] Error
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at tfg.Controllers.OrderController.OrderController.GetByUserId(Int32 id, String orderBy, String orderType) in C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\Controllers\OrderController.cs:line 79
+2023-05-20 13:02:14.669 +02:00 [ERR] Error
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at tfg.Controllers.OrderController.OrderController.GetByUserId(Int32 id, String orderBy, String orderType) in C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\Controllers\OrderController.cs:line 79
+2023-05-20 13:02:41.473 +02:00 [ERR] Error
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at tfg.Controllers.OrderController.OrderController.GetByUserId(Int32 id, String orderBy, String orderType) in C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\Controllers\OrderController.cs:line 79
+2023-05-20 13:02:59.668 +02:00 [ERR] Error
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at tfg.Controllers.OrderController.OrderController.GetByUserId(Int32 id, String orderBy, String orderType) in C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\Controllers\OrderController.cs:line 79
+2023-05-20 13:03:26.824 +02:00 [ERR] Error
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at tfg.Controllers.OrderController.OrderController.GetByUserId(Int32 id, String orderBy, String orderType) in C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\Controllers\OrderController.cs:line 79
+2023-05-27 13:02:21.019 +02:00 [ERR] Error in authentication
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.NpgsqlException (0x80004005): Failed to connect to 35.233.189.78:7894
+ ---> System.Net.Sockets.SocketException (10061): No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+   at Npgsql.Internal.NpgsqlConnector.Connect(NpgsqlTimeout timeout)
+   at Npgsql.Internal.NpgsqlConnector.Connect(NpgsqlTimeout timeout)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken, Boolean isFirstAttempt)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|207_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken, Boolean isFirstAttempt)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|28_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|45_0(Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.Open()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenDbConnection(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternal(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.Open(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.InitializeReader(Enumerator enumerator)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.<>c.<MoveNext>b__21_0(DbContext _, Enumerator enumerator)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+   at System.Linq.Enumerable.TryGetSingle[TSource](IEnumerable`1 source, Boolean& found)
+   at lambda_method12(Closure , QueryContext )
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.Execute[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.Internal.EntityQueryProvider.Execute[TResult](Expression expression)
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source)
+   at tfg.Repository.UserRepository.UserRepository.Login(User user) in C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\Repository\Services\UserRepository.cs:line 43
+   at tfg.Controllers.AuthController.AuthController.Auth(UserForLoginDTO user) in C:\Users\guill\OneDrive\Escritorio\Trabajo_Fin_Grad\tfg\Controllers\AuthController.cs:line 45
+2023-05-27 13:04:01.994 +02:00 [ERR] Error in authentication
+2023-05-27 13:09:40.621 +02:00 [ERR] Error in authentication

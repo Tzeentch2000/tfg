@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\guill\\OneDrive\\Escritorio\\tfg\\tfg.csproj": {}
+    "C:\\Users\\guill\\OneDrive\\Escritorio\\Trabajo_Fin_Grad\\tfg\\tfg.csproj": {}
   },
   "projects": {
-    "C:\\Users\\guill\\OneDrive\\Escritorio\\tfg\\tfg.csproj": {
+    "C:\\Users\\guill\\OneDrive\\Escritorio\\Trabajo_Fin_Grad\\tfg\\tfg.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\guill\\OneDrive\\Escritorio\\tfg\\tfg.csproj",
+        "projectUniqueName": "C:\\Users\\guill\\OneDrive\\Escritorio\\Trabajo_Fin_Grad\\tfg\\tfg.csproj",
         "projectName": "tfg",
-        "projectPath": "C:\\Users\\guill\\OneDrive\\Escritorio\\tfg\\tfg.csproj",
+        "projectPath": "C:\\Users\\guill\\OneDrive\\Escritorio\\Trabajo_Fin_Grad\\tfg\\tfg.csproj",
         "packagesPath": "C:\\Users\\guill\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\guill\\OneDrive\\Escritorio\\tfg\\obj\\",
+        "outputPath": "C:\\Users\\guill\\OneDrive\\Escritorio\\Trabajo_Fin_Grad\\tfg\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\guill\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,9 +40,57 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.9, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
+            "Serilog": {
+              "target": "Package",
+              "version": "[2.12.0, )"
+            },
+            "Serilog.Sinks.File": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
+            },
+            "Swashbuckle.AspNetCore.Swagger": {
+              "target": "Package",
+              "version": "[6.5.0, )"
             }
           },
           "imports": [
